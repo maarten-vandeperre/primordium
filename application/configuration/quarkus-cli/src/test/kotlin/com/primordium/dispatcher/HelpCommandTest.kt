@@ -7,15 +7,17 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 @QuarkusMainTest
-class HelpCommandTest {
+open class HelpCommandTest {
     @Test
     @Launch("--help")
-    fun basicHelpCommand(result: LaunchResult){
-        Assertions.assertThat(result.output).isEqualTo("""
+    fun basicHelpCommand(result: LaunchResult) {
+        Assertions.assertThat(result.output).isEqualTo(
+            """
             Primordium is a template engine to ....
   
             Basic commands:
                 new-template        Generate a new template with default values
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 }

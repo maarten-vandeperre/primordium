@@ -1,6 +1,6 @@
-package com.redhat.demo
+package com.primordium.dispatcher
 
 import io.quarkus.test.junit.QuarkusIntegrationTest
 
 @QuarkusIntegrationTest
-class GreetingResourceIT : GreetingResourceTest()
+class BasicErrorsIT : BasicErrorsTest()

@@ -10,12 +10,12 @@ repositories {
 
 val applicationVersion: String = File(".version").readBytes().toString().trim()
 
-group = "com.redhat.demo"
+group = "com.primordium"
 version = applicationVersion
 
 subprojects.filter { !(it.name == "platform" || it.parent?.name == "platform") }.forEach {
     println("configure ${it.name}")
-    it.group = "com.redhat.demo"
+    it.group = "com.primordium"
     it.version = applicationVersion
 
     it.repositories {
@@ -47,6 +47,5 @@ subprojects.filter { !(it.name == "platform" || it.parent?.name == "platform") }
     }
 
     it.dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     }
 }

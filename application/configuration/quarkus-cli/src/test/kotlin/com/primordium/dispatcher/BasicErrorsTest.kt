@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 @QuarkusMainTest
-class BasicErrorsTest {
+open class BasicErrorsTest {
 
     @Test
     @Launch("test")
