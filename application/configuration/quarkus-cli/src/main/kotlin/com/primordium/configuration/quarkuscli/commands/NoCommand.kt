@@ -1,0 +1,32 @@
+package com.primordium.configuration.quarkuscli.commands
+
+import com.primordium.core.coreutils.functional.Response
+import jakarta.enterprise.context.ApplicationScoped
+
+@ApplicationScoped
+class NoCommand: Command {
+    override val name: Output
+        get() = NAME
+    override val description: Output
+        get() = ""
+    override val category: CommandCategory
+        get() = CommandCategory.NONE
+
+    override fun execute(): Response<Output> {
+        return Response.fail("No parameters are given, try ' --help' to get more information")
+    }
+
+    override fun getHelp(): Output {
+        return """
+            Primordium is a template engine to ....
+            
+            Basic commands:
+                new-template        Generate a new template with default values
+        """.trimIndent()
+    }
+
+    companion object {
+        const val NAME = "no-command"
+    }
+
+}
