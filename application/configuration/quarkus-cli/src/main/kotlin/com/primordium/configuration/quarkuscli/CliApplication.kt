@@ -10,7 +10,7 @@ class CliApplication(
 ) : QuarkusApplication {
 
     override fun run(vararg args: String): Int {
-        println(dispatcher.dispatch(*args.filter { it.isNotBlank() }.toTypedArray()))
+        println(dispatcher.dispatch(*args.filter { it.isNotBlank() }.toTypedArray()))//TODO use logger
         return 0
     }
 }

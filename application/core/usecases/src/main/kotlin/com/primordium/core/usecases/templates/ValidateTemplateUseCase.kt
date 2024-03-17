@@ -3,16 +3,9 @@ package com.primordium.core.usecases.templates
 import com.primordium.core.coreutils.functional.Response
 import com.primordium.core.domain.templates.Template
 import com.primordium.core.domain.templates.TemplateDefinition
-import com.primordium.core.usecases.templates.ValidateTemplateUseCase.UseCaseRequest
-import com.primordium.core.usecases.templates.ValidateTemplateUseCase.UseCaseResponse
-
-typealias FieldName = String
-typealias ErrorMessage = String
-
-data class TemplateValidationResult(
-    val success: Boolean,
-    val fieldErrors: Map<FieldName, ErrorMessage>
-)
+import com.primordium.core.domain.templates.TemplateValidationResult
+import com.primordium.core.usecases.templates.ProcessTemplateUseCase.UseCaseRequest
+import com.primordium.core.usecases.templates.ProcessTemplateUseCase.UseCaseResponse
 
 interface ValidateTemplateUseCase {
     fun execute(request: UseCaseRequest): Response<UseCaseResponse>
@@ -27,9 +20,11 @@ interface ValidateTemplateUseCase {
     )
 }
 
-class DefaultValidateTemplateUseCase: ValidateTemplateUseCase{
+class DefaultValidateTemplateUseCase : ProcessTemplateUseCase {
     override fun execute(request: UseCaseRequest): Response<UseCaseResponse> {
-        TODO("Not yet implemented")
+        return request.template
+            .validate(request.templateDefinition)
+            .map { UseCaseResponse(validationResult = it) }
     }
 
 }
