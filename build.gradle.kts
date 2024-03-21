@@ -8,7 +8,7 @@ repositories {
     mavenLocal()
 }
 
-val applicationVersion: String = File(".version").readBytes().toString().trim()
+val applicationVersion: String = String(File(".version").readBytes()).trim()
 
 group = "com.primordium"
 version = applicationVersion

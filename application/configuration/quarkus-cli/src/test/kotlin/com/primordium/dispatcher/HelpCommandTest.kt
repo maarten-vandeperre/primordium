@@ -16,7 +16,7 @@ open class HelpCommandTest {
             Primordium is a template engine to ....
   
             Basic commands:
-                new-template        Generate a new template with default values
+                default-template-definition        Create a new default template definition.
         """.trimIndent()
         )
     }
