@@ -13,6 +13,7 @@ pluginManagement {
 rootProject.name="primordium"
 
 include(":platform:quarkus-platform")
+include(":platform:runtime-agnostic-platform")
 
 include(":application:configuration:quarkus-cli")
 

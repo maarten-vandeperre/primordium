@@ -6,7 +6,8 @@ javaPlatform {
     allowDependencies()
 }
 dependencies {
-    api(platform("io.quarkus:quarkus-bom:${properties.get("quarkusPlatformVersion")}"))
+    api(platform("org.assertj:assertj-core:3.25.3"))
+    api(platform("junit:junit:4.13.2"))
 }
 
 

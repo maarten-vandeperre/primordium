@@ -2,7 +2,7 @@ package com.primordium.core.coreutils.functional
 
 abstract class Response<DATA_TYPE> {
 
-    fun <NEW_TYPE> map(mapper: (data: DATA_TYPE) -> NEW_TYPE): Response<NEW_TYPE> {
+    fun <NEW_TYPE> mapData(mapper: (data: DATA_TYPE) -> NEW_TYPE): Response<NEW_TYPE> {
         return if (this is SuccessResponse) {
             SuccessResponse(mapper(data))
         } else {
@@ -10,7 +10,7 @@ abstract class Response<DATA_TYPE> {
         }
     }
 
-    fun <NEW_TYPE> flatMap(mapper: (data: DATA_TYPE) -> Response<NEW_TYPE>): Response<NEW_TYPE> {
+    fun <NEW_TYPE> map(mapper: (data: DATA_TYPE) -> Response<NEW_TYPE>): Response<NEW_TYPE> {
         return if (this is SuccessResponse) {
             mapper(this.data)
         } else {
@@ -28,6 +28,16 @@ abstract class Response<DATA_TYPE> {
 
         fun <DATA_TYPE> success(data: DATA_TYPE): Response<DATA_TYPE> {
             return SuccessResponse(data)
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        fun <DATA_TYPE> flatten(list: List<Response<DATA_TYPE>>): Response<List<DATA_TYPE>>{
+            val errors = list.filterIsInstance(ErrorResponse::class.java).map { it.errorMessages }.flatten()
+            return if(errors.isEmpty()){
+                success(list.filterIsInstance(SuccessResponse::class.java).map { it.data as DATA_TYPE })
+            } else {
+                fail(errors)
+            }
         }
     }
 }

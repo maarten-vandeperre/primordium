@@ -13,7 +13,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-arc")
     testImplementation("io.quarkus:quarkus-junit5")
-    testImplementation("org.assertj:assertj-core")
 }
 
 tasks.withType<Test> {

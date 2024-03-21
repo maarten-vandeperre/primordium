@@ -41,11 +41,14 @@ subprojects.filter { !(it.name == "platform" || it.parent?.name == "platform") }
 
     it.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {
-            jvmTarget =  JavaVersion.VERSION_21.toString()
+            jvmTarget = JavaVersion.VERSION_21.toString()
             javaParameters = true
         }
     }
 
     it.dependencies {
+        implementation(platform(project(":platform:runtime-agnostic-platform")))
+        testImplementation("junit:junit")
+        testImplementation("org.assertj:assertj-core")
     }
 }

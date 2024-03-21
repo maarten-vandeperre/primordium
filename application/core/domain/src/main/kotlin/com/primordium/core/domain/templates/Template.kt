@@ -7,6 +7,7 @@ import com.primordium.core.coreutils.functional.Validation
 import com.primordium.core.coreutils.functional.ValidationUtils
 
 typealias FieldName = String
+typealias FieldValue = String
 typealias ErrorMessage = String
 
 data class Template(

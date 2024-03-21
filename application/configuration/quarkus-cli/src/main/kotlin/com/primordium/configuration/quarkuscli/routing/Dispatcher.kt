@@ -20,7 +20,7 @@ class Dispatcher(
     fun dispatch(vararg args: String): Output {
         return try {
             val result = getCommand(*args)
-                .flatMap {
+                .map {
                     if (getLastArg(*args) == "--help") {
                         success(it.getHelp())
                     } else {
