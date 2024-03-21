@@ -17,7 +17,7 @@ class CreateDefaultTemplateDefinitionCommand(
     override val name: Output
         get() = NAME
     override val description: Output
-        get() = "Create a new default template definition."
+        get() = SHORT_DESCRIPTION
     override val category: CommandCategory
         get() = CommandCategory.BASIC_COMMAND
 
@@ -55,6 +55,7 @@ class CreateDefaultTemplateDefinitionCommand(
     companion object {
         const val NAME = "default-template-definition"
         const val DEFAULT_FILE_NAME = "default-primordium-template.yaml"
+        const val SHORT_DESCRIPTION = "Create a new default template definition."
         private val TEMPLATE_FIELD_SELECTION = TemplateFieldSelection(
             selection = TemplateDefinitionSelection(
                 applicationChecks = TemplateFieldSelectionItemWithSubFields(

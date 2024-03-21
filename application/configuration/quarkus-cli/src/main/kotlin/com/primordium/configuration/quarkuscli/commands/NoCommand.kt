@@ -21,7 +21,7 @@ class NoCommand : Command {
             Primordium is a template engine to ....
             
             Basic commands:
-                new-template        Generate a new template with default values
+                ${CreateDefaultTemplateDefinitionCommand.NAME}        ${CreateDefaultTemplateDefinitionCommand.SHORT_DESCRIPTION}
         """.trimIndent()
     }
 
