@@ -1,7 +1,0 @@
-primordium-template-definition:
-  name: Primordium Default Template
-  description: ""
-  version: 0.0.1
-  application-checks:
-    heart-beat-check:
-    conscious-check:

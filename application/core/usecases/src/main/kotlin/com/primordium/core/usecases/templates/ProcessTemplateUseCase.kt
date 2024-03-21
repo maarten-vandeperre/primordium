@@ -57,15 +57,6 @@ class DefaultProcessTemplateUseCase : ProcessTemplateUseCase {
         }
 
         private fun listPossibleProperties(fields: List<TemplateField>, parentalPrefix: String): Response<Map<FieldName, FieldValue>> {
-            val x = flatten(
-                fields.map { field ->
-                    if (field.subFields.isEmpty()) {
-                        success(mapOf("${parentalPrefix}${field.name}" to field.value))
-                    } else {
-                        listPossibleProperties(field.subFields, "${field.name}.")
-                    }
-                }
-            )
             return flatten(
                 fields.map { field ->
                     if (field.subFields.isEmpty()) {

@@ -23,7 +23,7 @@ class DefaultCreateDefaultTemplateDefinitionUseCase(
         return success(
             CreateDefaultTemplateDefinitionUseCase.UseCaseResponse(
                 templateDefinition = TemplateDefinition(
-                    name = "Primordium Template Defintion",
+                    name = "Primordium Template",
                     description = """
                     A version of the template to configure and validate for Primordium's use (i.e., generation of deployment files).
                 """.trimIndent(),

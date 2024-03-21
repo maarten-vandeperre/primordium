@@ -59,7 +59,7 @@ open class CreateDefaultTemplateDefinitionTest {
             assertThat(fileContent).isEqualTo(
                 """
                     ---
-                    name: "Primordium Template Defintion"
+                    name: "Primordium Template"
                     description: "A version of the template to configure and validate for Primordium's\
                       \ use (i.e., generation of deployment files)."
                     version: "0.0.1"
@@ -108,7 +108,7 @@ open class CreateDefaultTemplateDefinitionTest {
             assertThat(fileContent).isEqualTo(
                 """
                     ---
-                    name: "Primordium Template Defintion"
+                    name: "Primordium Template"
                     description: "A version of the template to configure and validate for Primordium's\
                       \ use (i.e., generation of deployment files)."
                     version: "0.0.1"

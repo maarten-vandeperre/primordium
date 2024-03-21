@@ -1,0 +1,11 @@
+---
+name: "Primordium Template"
+version: "0.0.1"
+fields:
+  - name: "application-checks"
+    required: true
+    subFields:
+      - name: "heart-beat-check"
+        subFields: []
+      - name: "conscious-check"
+        subFields: []
