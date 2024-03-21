@@ -1,8 +1,6 @@
 package com.primordium.configuration.quarkuscli.routing
 
-import com.primordium.configuration.quarkuscli.commands.Command
-import com.primordium.configuration.quarkuscli.commands.NoCommand
-import com.primordium.configuration.quarkuscli.commands.Output
+import com.primordium.configuration.quarkuscli.commands.*
 import com.primordium.core.coreutils.functional.ErrorResponse
 import com.primordium.core.coreutils.functional.Response
 import com.primordium.core.coreutils.functional.Response.Companion.fail
@@ -11,20 +9,22 @@ import com.primordium.core.coreutils.functional.SuccessResponse
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.enterprise.inject.Instance
 
+
 @ApplicationScoped
 class Dispatcher(
     commands: Instance<Command>
 ) {
     private val commandMap = commands.associateBy { it.name }
 
-    fun dispatch(vararg args: String): Output {
+    fun dispatch(vararg inputArgs: String): Output {
+        val args = inputArgs.toList().map { it.split(Regex(" ")).toList() }.flatten()
         return try {
-            val result = getCommand(*args)
+            val result = getCommand(args)
                 .map {
-                    if (getLastArg(*args) == "--help") {
+                    if (getLastArg(args) == "--help") {
                         success(it.getHelp())
                     } else {
-                        it.execute()
+                        it.execute(getParameters(args))
                     }
                 }
             when (result) {
@@ -33,7 +33,7 @@ class Dispatcher(
                 else -> throw IllegalStateException("Result type ${result.javaClass.canonicalName} is not supported.")
             }
         } catch (e: Exception) {
-            if (getLastArg(*args) == "--stacktrace") {
+            if (getLastArg(args) == "--stacktrace") {
                 println("Uncaught exception: ${e.localizedMessage}")
                 println(e.stackTraceToString())
             }
@@ -44,12 +44,15 @@ class Dispatcher(
         }
     }
 
-    private fun getCommand(vararg args: String): Response<Command> {
+    private fun getCommand(args: List<String>): Response<Command> {
         val cleanedArgs = args.filterNot { it.startsWith("--") }
         return if (cleanedArgs.isEmpty()) {
             success(commandMap[NoCommand.NAME]!!)
         } else {
-            fail("Unknown command for '${args.joinToString(" ")}'. Try running --help.")
+            when (getFirstArg(args)) {
+                CreateDefaultTemplateDefinitionCommand.NAME -> success(commandMap[getFirstArg(args)]!!)
+                else -> fail("Unknown command for '${args.joinToString(" ")}'. Try running --help.")
+            }
         }
     }
 
@@ -60,11 +63,25 @@ class Dispatcher(
         """.trimIndent().trim()
     }
 
-    private fun getLastArg(vararg args: String): String? {
+    private fun getLastArg(args: List<String>): String? {
         return if (args.isEmpty()) {
             null
         } else {
             args[args.size - 1]
         }
+    }
+
+    private fun getFirstArg(args: List<String>): String? {
+        return if (args.isEmpty()) {
+            null
+        } else {
+            args[0]
+        }
+    }
+
+    private fun getParameters(args: List<String>): Map<ParameterKey, ParameterValue> {
+        val parameters = args.joinToString(";")
+        val matcher = "--([a-zA-Z-]+)=([a-zA-Z-/_.0-9]+)".toRegex()
+        return matcher.findAll(parameters).map { it.groupValues[1] to it.groupValues[2] }.toMap()
     }
 }

@@ -23,11 +23,7 @@ class DefaultProcessTemplateUseCaseTest {
         val properties = result.toString()
         assertThat(properties).isEqualTo(
             """
-                ---
-                field1
-                field2.field2a
-                field2.field2b
-                ---
+                {field1=value1, field2.field2a=value2a, field2.field2b=value2b}
             """.trimIndent()
         )
     }

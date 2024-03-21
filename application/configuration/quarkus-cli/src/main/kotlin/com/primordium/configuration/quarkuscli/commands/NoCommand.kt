@@ -4,7 +4,7 @@ import com.primordium.core.coreutils.functional.Response
 import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class NoCommand: Command {
+class NoCommand : Command {
     override val name: Output
         get() = NAME
     override val description: Output
@@ -12,7 +12,7 @@ class NoCommand: Command {
     override val category: CommandCategory
         get() = CommandCategory.NONE
 
-    override fun execute(): Response<Output> {
+    override fun execute(parameters: Map<ParameterKey, ParameterValue>): Response<Output> {
         return Response.fail("No parameters are given, try ' --help' to get more information")
     }
 
