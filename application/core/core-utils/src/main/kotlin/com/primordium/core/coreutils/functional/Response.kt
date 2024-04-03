@@ -22,6 +22,7 @@ abstract class Response<DATA_TYPE> {
         fun <DATA_TYPE> fail(errorMessages: List<String>): Response<DATA_TYPE> {
             return ErrorResponse(errorMessages)
         }
+
         fun <DATA_TYPE> fail(errorMessage: String): Response<DATA_TYPE> {
             return ErrorResponse(listOf(errorMessage))
         }
@@ -30,11 +31,10 @@ abstract class Response<DATA_TYPE> {
             return SuccessResponse(data)
         }
 
-        @Suppress("UNCHECKED_CAST")
-        fun <DATA_TYPE> flatten(list: List<Response<DATA_TYPE>>): Response<List<DATA_TYPE>>{
+        fun flatten(list: List<Response<out Any>>): Response<List<Any>> {
             val errors = list.filterIsInstance(ErrorResponse::class.java).map { it.errorMessages }.flatten()
-            return if(errors.isEmpty()){
-                success(list.filterIsInstance(SuccessResponse::class.java).map { it.data as DATA_TYPE })
+            return if (errors.isEmpty()) {
+                success(list.filterIsInstance(SuccessResponse::class.java).map { it.data!! })
             } else {
                 fail(errors)
             }

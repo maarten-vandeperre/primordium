@@ -10,6 +10,8 @@ import java.nio.file.Files
 import java.util.*
 import kotlin.io.path.*
 
+//TODO test with relative and absolute paths
+//TODO test all commands with too many parameters (that don't exist)
 @QuarkusMainTest
 open class CreateDefaultTemplateDefinitionTest {
     @Test

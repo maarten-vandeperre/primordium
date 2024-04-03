@@ -22,6 +22,7 @@ class NoCommand : Command {
             
             Basic commands:
                 ${CreateDefaultTemplateDefinitionCommand.NAME}        ${CreateDefaultTemplateDefinitionCommand.SHORT_DESCRIPTION}
+                ${GenerateArtifactsCommand.NAME}                 ${GenerateArtifactsCommand.SHORT_DESCRIPTION}
         """.trimIndent()
     }
 

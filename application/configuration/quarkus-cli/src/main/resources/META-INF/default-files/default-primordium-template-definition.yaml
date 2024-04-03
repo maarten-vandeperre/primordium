@@ -1,0 +1,21 @@
+---
+#TODO test that this is the same as the output from the default use case
+name: "Primordium Template"
+description: "A version of the template to configure and validate for Primordium's\
+  \ use (i.e., generation of deployment files)."
+version: "0.0.1"
+fields:
+  - name: "application-checks"
+    description: "Checks that need to be implemented to define the overall health and\
+    \ responsiveness of the deployed application."
+    required: true
+    subFields:
+      - name: "heart-beat-check"
+        description: "Checks that the application started."
+        required: true
+        subFields: []
+      - name: "conscious-check"
+        description: "Checks that the application is conscious (i.e., responding in a\
+      \ timely manner)."
+        required: true
+        subFields: []

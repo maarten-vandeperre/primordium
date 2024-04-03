@@ -51,6 +51,7 @@ class Dispatcher(
         } else {
             when (getFirstArg(args)) {
                 CreateDefaultTemplateDefinitionCommand.NAME -> success(commandMap[getFirstArg(args)]!!)
+                GenerateArtifactsCommand.NAME -> success(commandMap[getFirstArg(args)]!!)
                 else -> fail("Unknown command for '${args.joinToString(" ")}'. Try running --help.")
             }
         }

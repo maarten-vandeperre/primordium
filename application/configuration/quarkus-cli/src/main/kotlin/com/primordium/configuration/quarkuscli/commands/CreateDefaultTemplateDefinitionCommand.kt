@@ -43,7 +43,7 @@ class CreateDefaultTemplateDefinitionCommand(
 
     override fun getHelp(): Output {
         return """
-            Creates a new default template definition.
+            $SHORT_DESCRIPTION
             
             Parameters (--parameter=...):
             *: required parameter
@@ -55,7 +55,7 @@ class CreateDefaultTemplateDefinitionCommand(
     companion object {
         const val NAME = "default-template-definition"
         const val DEFAULT_FILE_NAME = "default-primordium-template.yaml"
-        const val SHORT_DESCRIPTION = "Create a new default template definition."
+        const val SHORT_DESCRIPTION = "Creates a new default template definition."
         private val TEMPLATE_FIELD_SELECTION = TemplateFieldSelection(
             selection = TemplateDefinitionSelection(
                 applicationChecks = TemplateFieldSelectionItemWithSubFields(

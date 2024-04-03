@@ -41,6 +41,6 @@ data class TemplateValidationResult(
 
 data class TemplateField(
     val name: String,
-    val value: String,
+    val value: String? = null,
     val subFields: List<TemplateField> = emptyList()
 )

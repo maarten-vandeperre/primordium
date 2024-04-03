@@ -16,7 +16,8 @@ open class HelpCommandTest {
             Primordium is a template engine to ....
   
             Basic commands:
-                default-template-definition        Create a new default template definition.
+                default-template-definition        Creates a new default template definition.
+                generate-artifacts                 Generates the artifacts like (docker-/podman-)compose files, Kubernetes deployment files, ....
         """.trimIndent()
         )
     }

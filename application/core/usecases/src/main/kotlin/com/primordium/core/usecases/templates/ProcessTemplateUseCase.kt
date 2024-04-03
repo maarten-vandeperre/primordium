@@ -56,6 +56,7 @@ class DefaultProcessTemplateUseCase : ProcessTemplateUseCase {
             return listPossibleProperties(template.fields, "")
         }
 
+        @Suppress("UNCHECKED_CAST")
         private fun listPossibleProperties(fields: List<TemplateField>, parentalPrefix: String): Response<Map<FieldName, FieldValue>> {
             return flatten(
                 fields.map { field ->
@@ -66,6 +67,7 @@ class DefaultProcessTemplateUseCase : ProcessTemplateUseCase {
                     }
                 }
             )
+                .mapData { it as List<Map<FieldName, FieldValue>> }
                 .mapData { it.flatMap { it.entries }.associate { it.key to it.value } }
         }
 
