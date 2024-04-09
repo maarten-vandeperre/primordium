@@ -1,1 +1,3 @@
 /docker-podman/compose.yaml
+/kubernetes/service.yaml
+/kubernetes/deployment.yaml

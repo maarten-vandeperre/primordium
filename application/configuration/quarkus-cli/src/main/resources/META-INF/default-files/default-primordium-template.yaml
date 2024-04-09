@@ -1,14 +1,25 @@
 ---
 # TODO test that this is still valid with the default definition
-name: "Primordium Template"
-version: "0.0.1"
+name: Primordium Application
+version: 0.0.1
 fields:
-  - name: "application-checks"
-    required: true
+  - name: metadata
     subFields:
-      - name: "heart-beat-check"
-        value: "a heart beat check implementation"
+      - name: name
+        value: primordium-application
+      - name: namespace
+        value: primordium-project
+      - name: port
+        value: "8080"
+      - name: instance-count
+        value: "2"
+      - name: image
+        value: image-registry.openshift-image-registry.svc:5000/webinar/person-service@sha256:a89c47d43f1f7aa527bffce3bb5c92d63be2211f5ec93b47cd5cb0f456c7ac05
+  - name: application-checks
+    subFields:
+      - name: heart-beat-check
+        value: a heart beat check implementation
         subFields: []
-      - name: "conscious-check"
-        value: "a consciousness check implementation"
+      - name: conscious-check
+        value: a consciousness check implementation
         subFields: []

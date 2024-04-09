@@ -1,5 +1,12 @@
 # primordium
 
+## Introduction
+
+## Documentation
+
+## WIP features
+* Add default values for non-required fields (in the template definition YAML file).
+
 ./gradlew :application:configuration:quarkus-cli:quarkusDev --quarkus-args='--help test'
 
 ./gradlew :application:configuration:quarkus-cli:build -Dquarkus.package.type=uber-jar  

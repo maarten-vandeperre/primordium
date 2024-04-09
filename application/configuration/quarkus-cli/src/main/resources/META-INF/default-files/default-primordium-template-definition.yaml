@@ -1,5 +1,6 @@
 ---
 #TODO test that this is the same as the output from the default use case
+#TODO default value
 name: "Primordium Template"
 description: "A version of the template to configure and validate for Primordium's\
   \ use (i.e., generation of deployment files)."
