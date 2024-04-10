@@ -11,19 +11,23 @@ open class BasicErrorsTest {
 
     @Test
     @Launch("test")
-    fun unknownCommand(result: LaunchResult){
-        assertThat(result.output).isEqualTo("""
+    fun unknownCommand(result: LaunchResult) {
+        assertThat(result.output).isEqualTo(
+            """
             Command execution failed:
                 Unknown command for 'test'. Try running --help.
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 
     @Test
     @Launch("")
-    fun noArgs(result: LaunchResult){
-        assertThat(result.output).isEqualTo("""
+    fun noArgs(result: LaunchResult) {
+        assertThat(result.output).isEqualTo(
+            """
             Command execution failed:
                 No parameters are given, try ' --help' to get more information
-        """.trimIndent())
+        """.trimIndent()
+        )
     }
 }

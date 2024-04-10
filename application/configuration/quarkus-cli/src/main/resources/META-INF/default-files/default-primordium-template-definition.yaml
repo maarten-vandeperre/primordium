@@ -2,21 +2,46 @@
 #TODO test that this is the same as the output from the default use case
 #TODO default value
 name: "Primordium Template"
-description: "A version of the template to configure and validate for Primordium's\
-  \ use (i.e., generation of deployment files)."
+description: "A version of the template to configure and validate for Primordium's use (i.e., generation of deployment files)."
 version: "0.0.1"
 fields:
+  - name: "metadata"
+    description: "Metadata configurations in order to get the application deployed and to make the application accessible."
+    required: true
+    subFields:
+      - name: "name"
+        description: "The name of the application that will get deployed."
+        required: true
+        subFields: [ ]
+      - name: "name"
+        description: "The namespace in which the application that will get deployed."
+        required: true
+        subFields: [ ]
+      - name: "port"
+        description: "The port on which the application will be accessible."
+        required: true
+        subFields: [ ]
+      - name: "instance-count"
+        description: "The amount of instances of the specified application that need to run."
+        required: true
+        subFields: [ ]
+      - name: "image"
+        description: "The reference of the podman/docker/... image that will be deployed."
+        required: true
+        subFields: [ ]
   - name: "application-checks"
-    description: "Checks that need to be implemented to define the overall health and\
-    \ responsiveness of the deployed application."
+    description: "Checks that need to be implemented to define the overall health and responsiveness of the deployed application."
     required: true
     subFields:
       - name: "heart-beat-check"
-        description: "Checks that the application started."
+        description: "Checks that the application started and is active (i.e., no unrecoverable application failure like a dead lock occurred)."
         required: true
-        subFields: []
+        subFields: [ ]
       - name: "conscious-check"
-        description: "Checks that the application is conscious (i.e., responding in a\
-      \ timely manner)."
+        description: "Checks that the application is conscious (i.e., responding in a timely manner)."
         required: true
-        subFields: []
+        subFields: [ ]
+      - name: "birth-check"
+        description: "Checks that the application is started (i.e., has a heart beat, but this check can have a different polling/checking interval)."
+        required: true
+        subFields: [ ]

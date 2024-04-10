@@ -8,7 +8,6 @@ import com.primordium.core.domain.templates.TemplateField
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
-import java.nio.file.Paths
 
 //TODO test and on template definition test if file exists
 open class TemplateUtilsTest {

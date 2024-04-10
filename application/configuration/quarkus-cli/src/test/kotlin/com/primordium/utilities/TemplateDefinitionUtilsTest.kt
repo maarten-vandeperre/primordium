@@ -8,7 +8,6 @@ import com.primordium.core.domain.templates.TemplateDefinitionField
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
-import java.nio.file.Paths
 
 open class TemplateDefinitionUtilsTest {
 

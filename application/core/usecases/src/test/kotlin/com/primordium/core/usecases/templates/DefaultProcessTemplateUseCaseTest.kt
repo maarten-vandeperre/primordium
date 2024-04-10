@@ -41,7 +41,7 @@ class DefaultProcessTemplateUseCaseTest {
 
         //When
         val response = DefaultProcessTemplateUseCase.fillPlaceholder(placeholder, template)
-        if(response is ErrorResponse){
+        if (response is ErrorResponse) {
             println(response.errorMessages.joinToString("\n"))
         }
         val filledPlaceholder: String = (response as SuccessResponse).data

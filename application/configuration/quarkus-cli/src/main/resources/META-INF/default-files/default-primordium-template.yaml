@@ -18,8 +18,8 @@ fields:
   - name: application-checks
     subFields:
       - name: heart-beat-check
-        value: a heart beat check implementation
-        subFields: []
+        value: /probes/liveness
       - name: conscious-check
-        value: a consciousness check implementation
-        subFields: []
+        value: /probes/readyness
+      - name: birth-check
+        value: /probes/startup

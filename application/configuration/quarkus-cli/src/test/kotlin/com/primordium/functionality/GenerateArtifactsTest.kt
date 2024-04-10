@@ -54,8 +54,11 @@ open class GenerateArtifactsTest {
             Assertions.assertThat(cmdResult.output).isEqualTo(
                 """
                 Generated the following files:
-                    ${directory.absolutePathString()}/docker-podman/compose.yaml
                 
+                ${directory.absolutePathString()}/docker-podman/compose.yaml
+                ${directory.absolutePathString()}/kubernetes/deployment.yaml
+                ${directory.absolutePathString()}/kubernetes/service.yaml
+                ____________
                 Couldn't generate the following files:
                     
                 """.trimIndent()

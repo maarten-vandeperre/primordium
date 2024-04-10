@@ -7,7 +7,7 @@ fields:
     subFields:
       - name: "heart-beat-check"
         value: "a heart beat check implementation"
-        subFields: []
+        subFields: [ ]
       - name: "conscious-check"
         value: "a consciousness check implementation"
-        subFields: []
+        subFields: [ ]

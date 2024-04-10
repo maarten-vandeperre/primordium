@@ -25,7 +25,7 @@ spec:
     spec:
       volumes:
         - name: <<metadata.name>>-1
-          emptyDir: {}
+          emptyDir: { }
       containers:
         - resources:
             limits:
@@ -36,7 +36,7 @@ spec:
               memory: 125Mi
           readinessProbe:
             httpGet:
-              path: /readiness
+              path: <<application-checks.birth-check>>
               port: <<metadata.port>>
               scheme: HTTPS
             initialDelaySeconds: 5
@@ -48,7 +48,7 @@ spec:
           name: <<metadata.name>>
           livenessProbe:
             httpGet:
-              path: /liveness
+              path: <<application-checks.heart-beat-check>>
               port: <<metadata.port>>
               scheme: HTTP
             timeoutSeconds: 1
@@ -61,7 +61,7 @@ spec:
           imagePullPolicy: IfNotPresent
           startupProbe:
             httpGet:
-              path: /startup
+              path: <<application-checks.birth-check>>
               port: <<metadata.port>>
               scheme: HTTP
             timeoutSeconds: 1
@@ -74,13 +74,13 @@ spec:
           terminationMessagePolicy: File
           image: >-
             <<metadata.image>>
-          env: []
+          env: [ ]
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      securityContext: {}
+      securityContext: { }
       schedulerName: default-scheduler
-      imagePullSecrets: []
+      imagePullSecrets: [ ]
   strategy:
     type: RollingUpdate
     rollingUpdate:
