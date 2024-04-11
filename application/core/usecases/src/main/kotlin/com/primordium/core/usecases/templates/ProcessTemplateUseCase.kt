@@ -72,7 +72,7 @@ class DefaultProcessTemplateUseCase : ProcessTemplateUseCase {
         }
 
         fun fillPlaceholder(placeholder: String, template: Template): Response<String> {
-            val matcher = "<<(.*)>>".toRegex()
+            val matcher = "<<([^>]*)>>".toRegex()
             val extractedProperties = matcher.findAll(placeholder).map { it.groupValues[1] }.toSet()
             return listPossibleProperties(template)
                 .map { templateProperties ->

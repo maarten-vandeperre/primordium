@@ -1,5 +1,6 @@
 ---
 # TODO test that this is still valid with the default definition
+# TODO move to test resources
 name: Primordium Application
 version: 0.0.1
 fields:

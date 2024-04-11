@@ -1,9 +1,12 @@
 version: '3.8'
 services:
   application:
-    image: todo:0.0.1
+    container_name: <<metadata.name>>
+    image: <<metadata.image>>
+    ports:
+      - '<<metadata.port>>:<<metadata.port>>'
     healthcheck:
-      test: "curl -f localhost:8080"
+      test: "(curl -f localhost:<<metadata.port>>/<<application-checks.birth-check>> && curl -f localhost:<<metadata.port>>/<<application-checks.heart-beat-check>>) || exit 1"
       interval: 5s
       timeout: 5s
       retries: 20
