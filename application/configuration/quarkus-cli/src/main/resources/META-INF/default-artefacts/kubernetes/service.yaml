@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: <<metadata.name>>
+  namespace: <<metadata.namespace>>
+  labels:
+    app: <<metadata.name>>
+    app.kubernetes.io/component: <<metadata.name>>
+    app.kubernetes.io/instance: <<metadata.name>>
+    app.kubernetes.io/name: <<metadata.name>>
+    app.kubernetes.io/part-of: <<metadata.name>>-app
+spec:
+  ports:
+    - name: <<metadata.port>>-tcp
+      protocol: TCP
+      port: <<metadata.port>>
+      targetPort: <<metadata.port>>
+  selector:
+    app: <<metadata.name>>
+    deployment: <<metadata.name>>

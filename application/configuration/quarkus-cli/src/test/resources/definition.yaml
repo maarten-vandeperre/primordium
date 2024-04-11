@@ -12,9 +12,9 @@ fields:
       - name: "heart-beat-check"
         description: "Checks that the application started."
         required: true
-        subFields: []
+        subFields: [ ]
       - name: "conscious-check"
         description: "Checks that the application is conscious (i.e., responding in a\
       \ timely manner)."
         required: true
-        subFields: []
+        subFields: [ ]

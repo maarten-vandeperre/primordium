@@ -10,7 +10,7 @@ pluginManagement {
         id(quarkusPluginId) version quarkusPluginVersion
     }
 }
-rootProject.name="primordium"
+rootProject.name = "primordium"
 
 include(":platform:quarkus-platform")
 include(":platform:runtime-agnostic-platform")

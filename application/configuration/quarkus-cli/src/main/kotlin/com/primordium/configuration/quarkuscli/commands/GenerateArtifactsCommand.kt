@@ -58,18 +58,20 @@ class GenerateArtifactsCommand(
                     }
 
                     """
-                        Generated the following files:
-                        ${
+Generated the following files:
+
+${
                         it.filledContent
                             .filter { it.content is SuccessResponse }
-                            .joinToString(";\n", "    ") { "${parameters["directory"]}${it.name}" }
+                            .map { "${parameters["directory"]}${it.name}" }
+                            .joinToString("\n") //TODO add test with multiple files, separator was not ok
                     }
-                        
-                        Couldn't generate the following files:
-                        ${
+____________
+Couldn't generate the following files:
+${
                         it.filledContent
                             .filter { it.content is ErrorResponse }
-                            .joinToString(";\n", "    ") { "${parameters["directory"]}${it.name}: ${(it.content as ErrorResponse).errorMessages.joinToString(";")}" }
+                            .joinToString("\n", "    ") { "${parameters["directory"]}${it.name}: ${(it.content as ErrorResponse).errorMessages.joinToString(";")}" }
                     }
                     """.trimIndent()
                 }

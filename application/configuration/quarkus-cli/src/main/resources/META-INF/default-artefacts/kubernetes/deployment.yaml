@@ -1,0 +1,90 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: <<metadata.name>>
+  namespace: <<metadata.namespace>>
+  labels:
+    app: <<metadata.name>>
+    app.kubernetes.io/component: <<metadata.name>>
+    app.kubernetes.io/instance: <<metadata.name>>
+    app.kubernetes.io/name: <<metadata.name>>
+    app.kubernetes.io/part-of: <<metadata.name>>-app
+    app.openshift.io/runtime-namespace: webinar
+spec:
+  replicas: <<metadata.instance-count>>
+  selector:
+    matchLabels:
+      app: <<metadata.name>>
+  template:
+    metadata:
+      labels:
+        app: <<metadata.name>>
+        deployment: <<metadata.name>>
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+    spec:
+      volumes:
+        - name: <<metadata.name>>-1
+          emptyDir: { }
+      containers:
+        - resources:
+            limits:
+              cpu: 500m
+              memory: 250Mi
+            requests:
+              cpu: 250m
+              memory: 125Mi
+          readinessProbe:
+            httpGet:
+              path: <<application-checks.birth-check>>
+              port: <<metadata.port>>
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: <<metadata.name>>
+          livenessProbe:
+            httpGet:
+              path: <<application-checks.heart-beat-check>>
+              port: <<metadata.port>>
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          startupProbe:
+            httpGet:
+              path: <<application-checks.birth-check>>
+              port: <<metadata.port>>
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          volumeMounts:
+            - name: <<metadata.name>>-1
+              mountPath: /tmp
+          terminationMessagePolicy: File
+          image: >-
+            <<metadata.image>>
+          env: [ ]
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: { }
+      schedulerName: default-scheduler
+      imagePullSecrets: [ ]
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

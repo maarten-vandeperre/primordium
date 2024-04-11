@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.primordium.core.coreutils.functional.Response
 import com.primordium.core.usecases.templates.*
 import jakarta.enterprise.context.ApplicationScoped
+import org.yaml.snakeyaml.DumperOptions
 import java.io.PrintWriter
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -31,7 +32,11 @@ class CreateDefaultTemplateDefinitionCommand(
                 CreateDefaultTemplateDefinitionUseCase.UseCaseRequest(TEMPLATE_FIELD_SELECTION)
             ).mapData { response ->
                 PrintWriter(file.toFile()).use { writer ->
-                    val factory = YAMLFactory()
+                    val builder = YAMLFactory.builder()
+                    val dumperOptions = DumperOptions()
+                    dumperOptions.width = 200
+                    builder.dumperOptions(dumperOptions)
+                    val factory = builder.build()
                     val mapper = ObjectMapper(factory)
                     val yaml = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(response.templateDefinition)
                     writer.write(yaml)
@@ -58,6 +63,26 @@ class CreateDefaultTemplateDefinitionCommand(
         const val SHORT_DESCRIPTION = "Creates a new default template definition."
         private val TEMPLATE_FIELD_SELECTION = TemplateFieldSelection(
             selection = TemplateDefinitionSelection(
+                metadata = TemplateFieldSelectionItemWithSubFields(
+                    enabled = true,
+                    subFields = TemplateDefinitionSelectionForMetaData(
+                        name = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        ),
+                        namespace = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        ),
+                        port = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        ),
+                        instanceCount = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        ),
+                        image = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        )
+                    )
+                ),
                 applicationChecks = TemplateFieldSelectionItemWithSubFields(
                     enabled = true,
                     subFields = TemplateDefinitionSelectionForApplicationChecks(
@@ -65,6 +90,9 @@ class CreateDefaultTemplateDefinitionCommand(
                             enabled = true
                         ),
                         consciousCheck = TemplateFieldSelectionItemWithoutSubFields(
+                            enabled = true
+                        ),
+                        birthCheck = TemplateFieldSelectionItemWithoutSubFields(
                             enabled = true
                         )
                     )
